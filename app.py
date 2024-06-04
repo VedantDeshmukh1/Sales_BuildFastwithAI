@@ -37,7 +37,8 @@ The sales pitch should contain the script the salesperson can say in the first c
 sales_prompt_template = PromptTemplate(template=sales_template, input_variables=['course_information', 'name', 'occupation'])
 
 # Create LLMChain
-sales_persona_chain = LLMChain(prompt=sales_prompt_template, llm=gpt4_model)
+#sales_persona_chain = LLMChain(prompt=sales_prompt_template, llm=gpt4_model)
+sales_persona_chain = sales_prompt_template | gpt4_model
 
 # Streamlit app
 def main():
@@ -50,7 +51,7 @@ def main():
 
     # Generate sales pitch
     if st.button("Generate Sales Pitch"):
-        response = sales_persona_chain.run({"course_information": course_information, "name": name, "occupation": occupation})
+        response = sales_persona_chain.invoke({"course_information": course_information, "name": name, "occupation": occupation})
         
         # Display parsed output
         st.markdown("## Sales Pitch")

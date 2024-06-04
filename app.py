@@ -1,4 +1,3 @@
-
 import os
 import streamlit as st
 from langchain_openai import ChatOpenAI
@@ -65,7 +64,7 @@ if st.button("Generate Sales Pitch"):
             
             # Display parsed output
             st.markdown("## Sales Pitch")
-            for point in response['content'].split("\n"):
+            for point in response.content.split("\n"):
                 if point.strip():
                     if point.startswith("1.") or point.startswith("2.") or point.startswith("3.") or point.startswith("4."):
                         st.markdown(f"**{point.strip()}**")
